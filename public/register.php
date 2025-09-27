@@ -7,14 +7,9 @@ session_start();
 
 if($_SERVER['REQUEST_METHOD'] === 'POST'){
     $user = new User($conn);
-    $auth = new Auth();
-    $loggedInUser = $user->login($_POST['email'], $_POST['senha']);
-    if($loggedInUser){
-        $auth -> loginUser($loggedInUser);
-        header("location: index.php");
-    } else{
-        echo "<script>alert('Login Falhou!')</script>";
-    }
+    
+    $user->register($_POST['nome'], $_POST['email'], $_POST['senha']);
+    header("location: login.php");
 }
 
 ?>
@@ -23,15 +18,15 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login</title>
+    <title>Registrar</title>
     <link rel="stylesheet" href="../assects/css/style.css">
 </head>
 <body>
-    <form method="POST" action="login.php">
+    <form method="POST" action="register.php">
+        <input type="text" name="nome" required placeholder="Seu Nome"><br>
         <input type="email" name="email" required placeholder="Email"><br>
         <input type="password" name="senha" required placeholder="Senha"><br>
-        <button type="submit" name="enviar">Login</button><br>
-        <a href="register.php">Registrar-se</a>
+        <button type="submit" name="enviar">Registrar</button>
     </form>
 </body>
 </html>

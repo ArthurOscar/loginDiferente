@@ -1,6 +1,5 @@
 <?php
-
-
+session_start()
 ?>
 
 <html lang="en">
@@ -12,7 +11,14 @@
 </head>
 <body>
     <div class="container">
-
+    <h1>Bem-vindo ao CRUD com foto</h1>
+    <?php if(isset($_SESSION['user_id'])): ?>
+        <p>Olá, <?php echo htmlspecialchars($_SESSION['username']);?>! Você está logado</p>
+        <a href="dashboard.php">Ir para o dashboard</a><br>
+        <a href="logout.php">Sair</a>
+    <?php else: ?>
+        <p>Por Favor faça seu <a href="login.php">Login</a></p>
+    <?php endif;?>
     </div>
 </body>
 </html>
